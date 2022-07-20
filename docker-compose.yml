@@ -1,13 +1,19 @@
-version: "2.1"
+version: '2.1'
 
 services:
+  # install nginx and start it on port 80
+
+  nginx:
+    image: nginx
+    ports:
+      - '5000:8080'
   ibeam:
-    image: voyz/ibeam
-    container_name: ibeam
+    image: ibeam-nginx
+    container_name: ibeam-2
     env_file:
       - env.list
     ports:
-      - 5000:5000
-      - 5001:5001
+      # listen on port 8080 and redirect to port 5000
+      - '8080:5000'
     network_mode: bridge # Required due to clientportal.gw IP restrictions
     restart: 'no' # Prevents IBEAM_MAX_FAILED_AUTH from being exceeded
