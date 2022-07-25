@@ -29,6 +29,8 @@ RUN \
     # Install python packages
     pip install --upgrade pip setuptools wheel && \
     pip install -r /srv/requirements.txt && \
+    # Install flask 
+    pip install flask && \
     # Remove packages and package lists
     apt-get purge -y --auto-remove build-essential && \
     rm -rf /var/lib/apt/lists/*
@@ -50,4 +52,5 @@ USER $USER_NAME
 #CMD python ./ibeam_starter.py
 #ENTRYPOINT ["/srv/ibeam/run.sh"]
 #ENTRYPOINT ["bash"]
-CMD ["/srv/ibeam/run.sh"]
+#CMD ["/srv/ibeam/run.sh"]
+CMD python ./app.py

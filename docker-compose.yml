@@ -6,14 +6,13 @@ services:
   nginx:
     image: nginx
     ports:
-      - '5000:8080'
+      - '8080:8080'
   ibeam:
-    image: ibeam-nginx
+    image: ibeam
     container_name: ibeam-2
     env_file:
-      - env.list
+      - './env.list'
     ports:
-      # listen on port 8080 and redirect to port 5000
-      - '8080:5000'
+      - '5000:5000'
     network_mode: bridge # Required due to clientportal.gw IP restrictions
     restart: 'no' # Prevents IBEAM_MAX_FAILED_AUTH from being exceeded
