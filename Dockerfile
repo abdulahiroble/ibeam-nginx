@@ -31,6 +31,8 @@ RUN \
     pip install -r /srv/requirements.txt && \
     # Install flask 
     pip install flask && \
+    # Install uwsgi
+    pip install uwsgi && \
     # Remove packages and package lists
     apt-get purge -y --auto-remove build-essential && \
     rm -rf /var/lib/apt/lists/*
@@ -52,5 +54,6 @@ USER $USER_NAME
 #CMD python ./ibeam_starter.py
 #ENTRYPOINT ["/srv/ibeam/run.sh"]
 #ENTRYPOINT ["bash"]
-#CMD ["/srv/ibeam/run.sh"]
-CMD python ./app.py
+# CMD ["/srv/ibeam/run.sh", "uwsgi", "app.ini"]
+#CMD python ./app.py
+CMD ["uwsgi", "app.ini"]

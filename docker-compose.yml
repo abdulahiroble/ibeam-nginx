@@ -1,15 +1,17 @@
 version: '2.1'
 
 services:
-  # install nginx and start it on port 80
-
   nginx:
-    image: nginx
+    build: './nginx'
+    container_name: nginx
+    restart: always
     ports:
-      - '8080:8080'
+      - '80:80'
   ibeam:
     image: ibeam
     container_name: ibeam-2
+    environment:
+      - APP_NAME=my-app
     env_file:
       - './env.list'
     ports:
